@@ -1,0 +1,22 @@
+﻿@model Assignment4.Models.Product
+@{
+    ViewData["Title"] = "Confirm Deletion";
+}
+
+<h2>Confirm Deletion</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">Quantity: <strong>@Model.Quantity</strong></p>
+        <p class="card-text">Price: <strong>@Model.Price.ToString("0.00")</strong></p>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <!-- ensure the POST sends a field named 'id' because the action signature expects int id -->
+    <input type="hidden" name="id" value="@Model.ProductId" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-controller="Home" asp-action="ProductList" class="btn btn-secondary">Cancel</a>
+</form>
